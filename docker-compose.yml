@@ -1,0 +1,12 @@
+version: '3'
+services:
+  python:
+    command: flask run -h 0.0.0.0 -p 5000
+    build:
+      context: .
+    ports:
+     - 5000:5000
+    env_file:
+     - ./app/.env
+    volumes:
+     - ./app:/app
