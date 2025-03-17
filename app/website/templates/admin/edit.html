@@ -1,0 +1,13 @@
+{% extends 'admin/model/edit.html' %}
+
+{% block head_css %}
+{{ super() }}
+{{ simplemde.css }}
+{{ simplemde.js }}
+{% endblock %}
+
+
+{% block body %}
+{{ super() }}
+{{ simplemde.load }}
+{% endblock %}

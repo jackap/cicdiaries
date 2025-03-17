@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Welcome to CI/CD Diaries</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>CI/CD Diaries is a blog that aims to provide a comprehensive guide to Continuous Integration and
+                Continuous Deployment. The blog is a collection of articles that cover the basics of CI/CD, the tools
+                used in CI/CD, and the best practices to follow while implementing CI/CD in your projects.</p>
+            <p>Whether you are a beginner looking to learn about CI/CD or an experienced developer looking to improve
+                your CI/CD skills, CI/CD Diaries has something for everyone. The blog is updated regularly with new
+                articles, so make sure to check back often for the latest content.</p>
+                <p>
+                    This is a student project, but with some effort, it has the potential to become a fully-fledged website.
+                </p>
+        </div>
+        <div class="col-md-6">
+            <img src="{{ url_for('static', filename='images/whatisthis.webp') }}" class="img-fluid" alt="What is this?">
+        </div>
+    </div>
+</div>
+{% endblock %}

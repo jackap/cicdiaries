@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center custom-title">My repositories</h2>
+    <div class="row">
+        </p>
+        </p>
+        <h5 class="text-center mb-4">Here are some of my repositories. Feel free to check them out.</h5>
+    </p>
+        {% for news in news_list %}
+        <div class="col-md-8 offset-md-2 mb-4">
+            <div class="card custom-card">
+                {% if news.image_url %}
+                <img src="{{ news.image_url }}" class="card-img-top custom-img" alt="{{ news.name }}">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title custom-text">{{ news.name }}</h5>
+                    <p class="card-text custom-description flex-grow-1">{{ news.description }}</p>
+                    <p class="custom-date">📅 {{ news.date }}</p>
+                    <a href="{{ news.html_url }}" class="btn custom-btn mt-auto" target="_blank">Read More</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

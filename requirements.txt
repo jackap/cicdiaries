@@ -1,0 +1,12 @@
+flask
+flask-cors
+flask-sqlalchemy
+requests
+flask-admin
+pytest
+gunicorn
+gevent
+python-dotenv
+sqlalchemy-utils
+flask-login
+pylint

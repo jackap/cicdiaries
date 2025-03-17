@@ -1,0 +1,162 @@
+/* Navbar */
+.custom-navbar {
+    background-color: #252537; /* Dark blue/gray */
+    padding: 15px 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+    color: #ff6b6b; /* Red accent */
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.navbar-brand:hover {
+    color: #e63946;
+}
+
+.navbar-nav .nav-link {
+    color: #f8f9fa;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+    padding: 10px 15px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff6b6b;
+}
+
+/* Active link */
+.navbar-nav .nav-link.active {
+    color: #ff6b6b;
+    font-weight: bold;
+    border-bottom: 2px solid #ff6b6b;
+}
+
+/* Navbar Toggler (Mobile) */
+.navbar-toggler {
+    border: none;
+    background-color: transparent;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1); /* Makes the default icon white */
+}
+
+
+/* General Styles */
+body {
+    background-color: #1e1e2e; /* Dark background */
+    font-family: 'Poppins', sans-serif; /* Modern font */
+    color: #f8f9fa; /* Light text color for contrast */
+    margin: 0;
+    padding: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #f8f9fa; /* Light color for all headings */
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ff6b6b; /* Underline effect */
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #252537; /* Slightly lighter dark */
+    padding: 10px 20px;
+}
+
+.navbar a {
+    color: #f8f9fa;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar a:hover {
+    color: #ff6b6b;
+}
+
+/* Card Styles */
+.custom-card {
+    background: #2a2d3e;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.custom-card:hover {
+    transform: scale(1.02);
+}
+
+.custom-img {
+    height: 250px;
+    object-fit: cover;
+}
+
+/* Text and Buttons */
+.custom-text {
+    color: #f8f9fa;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.custom-description {
+    color: #d1d1e0;
+    font-size: 1rem;
+}
+
+.custom-date {
+    color: #a0a0b3;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Buttons */
+.custom-btn {
+    background-color: #ff6b6b;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-align: center;
+    transition: background 0.3s;
+    border: none;
+}
+
+.custom-btn:hover {
+    background-color: #e63946;
+}
+
+/* Footer */
+.footer {
+    background: #252537;
+    color: #a0a0b3;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .custom-card {
+        margin: 10px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+}

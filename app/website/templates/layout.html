@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>API</title>
+
+  <!-- Bootstrap core CSS -->
+
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <!-- Custom styles for this template -->
+  <link src="{{url_for('static', filename='css/album.css')}}" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    {% if current_user.is_authenticated == True %}
+    <a href="{{ url_for('logout') }}" class="btn btn-lg"
+      style="position: absolute; right: 50px;top: 25px; background-color : white;color : rgb(255, 83, 0)">Logout</a>
+
+    {% else %}
+    <a href="{{ url_for('login') }}" class="btn btn-lg"
+      style="position: absolute; right: 50px;top: 25px; background-color : white;color : rgb(255, 83, 0)">Login</a>
+    {% endif %}
+
+  </header>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-danger dismissible">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  {% block body %}{% endblock %}
