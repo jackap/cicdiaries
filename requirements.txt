@@ -10,3 +10,4 @@ python-dotenv
 sqlalchemy-utils
 flask-login
 pylint
+bandit

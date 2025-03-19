@@ -1,0 +1,12 @@
+version: '3'
+services:
+  python:
+    image: 100.78.121.74:5001/jacopobufalino/cloud-security-lab:latest
+    command: flask run --host=0.0.0.0 --debug
+    ports:
+     - 5000:5000
+    env_file:
+     - .env.ci
+    volumes:
+     - ./app:/app
+     - ./db:/db
