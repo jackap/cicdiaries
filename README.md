@@ -34,6 +34,8 @@ FLASK_ENV = 'development'
 GITHUB_USER = 'jackap'
 ```
 
+> If you do not host the app at the root of the domain (e.g., your app is available at 10.10.10.10/test instead of 10.10.10.10) then you need to specify  the `SCRIPT_NAME` environment variable with the app path (test in the example).
+
 ### Install dependencies
 
 1. `pip install -r requirements.txt`
@@ -43,13 +45,19 @@ GITHUB_USER = 'jackap'
 
 We use `pytest` for unit tests in this app.
 
-
-run: `pytest` inside the `app` folder
-
 ### Linting
 
 This application uses `pylint` for linting code.
 
-```bash
-pylint app
-```
+### Source code analysis
+
+We use `bandit` for source code analysis.
+
+### Dependency analysis
+
+`pip-audit` is the tool we use for auditing the dependencies.
+
+
+## Production deployment
+
+Use [gunicorn](https://gunicorn.org/) to deploy the app in production.

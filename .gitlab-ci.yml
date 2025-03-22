@@ -1,0 +1,105 @@
+image: python:latest
+
+stages:
+  - install
+  - lint
+  - code-audit
+  - test
+  - containerize
+  - container-audit
+  - container-test
+  - deploy
+  - notify
+
+install:
+  stage: install
+  script:
+    - echo "Install dependencies from requirements.txt and cache them" && false  
+
+lint:
+  stage: lint
+  script:
+   - echo "Load the installed dependencies from cache and lint the code" && false
+
+code-audit:
+  stage: code-audit
+  script:
+   - echo "Load the installed dependencies from cache and audit the code" && false
+
+dep-audit:
+  stage: code-audit
+  script:
+   - echo "Load the installed dependencies from cache and audit the dependencies (can fail)" && false
+
+test:
+  stage: test
+  script:
+   - echo "Load the installed dependencies from cache and test the code" && false
+containerize:
+  stage: containerize
+  image: docker:latest
+  services:
+    - docker:dind 
+  script:
+    - echo "Build, tag and push the image" && false
+
+
+container-audit:
+  stage: container-audit
+  image: docker:stable
+  services:
+    - docker:dind
+
+  before_script:
+    - echo "Install trivy"
+  script:
+    - echo "run trivy (can fail)" || false
+
+container-test:
+  stage: container-test
+  image: docker:latest
+
+  services:
+    - docker:dind 
+  script:
+    echo "login to the registry and use docker-compose to test that the application works" || false
+  after_script:
+    echo "delete all services and orphans containers" || false
+
+
+deploy:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  script:
+    - kubectl config use-context $KUBE_CONTEXT
+    - kubectl get secret regcred -n jacopobufalino >/dev/null 2>&1  || kubectl create secret docker-registry regcred -n jacopobufalino --docker-server=$CI_REGISTRY --docker-username=jacopobufalino@gmail.com --docker-password=$REGISTRY_TOKEN --docker-email=jacopobufalino@gmail.com
+    - kubectl apply -f k8s.yaml -n jacopobufalino
+
+  variables:
+    KUBE_CONTEXT: "<your_group>/cloud-security-lab:k8s-agent"
+
+
+notify-success:
+  stage: notify
+  image: curlimages/curl:latest
+  script:
+    - | 
+      MESSAGE="✅ Deployment Succeeded! Pipeline:[#$CI_PIPELINE_ID]($CI_PIPELINE_URL) -- Visit: https://kubernetes.jackops.dev/<yourusername>"
+      curl -s -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage \
+        -d chat_id="${TELEGRAM_CHAT_ID}" \
+        -d parse_mode="Markdown" \
+        -d text="$MESSAGE"
+
+
+notify-failure:
+  stage: notify
+  image: curlimages/curl:latest
+  script:
+    - |
+      MESSAGE="❌ Pipeline for student <yourusername> [#$CI_PIPELINE_ID]($CI_PIPELINE_URL) Failed! Status: $CI_JOB_STATUS"
+      curl -s -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage \
+        -d chat_id="${TELEGRAM_CHAT_ID}" \
+        -d parse_mode="Markdown" \
+        -d text="$MESSAGE"

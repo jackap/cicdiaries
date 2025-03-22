@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    storage: 30Mi
+  storageClassName: local-path
+---
+apiVersion: apps/v1
+kind: Deployment # TODO: add the rest of the deployment configuration
+    spec:
+      imagePullSecrets:
+      - name: regcred # Do not change this. You should create a secret with this name containing your registry credentials. 
+      containers:
+      - name: blog
+        image: # Addimage
+        command: ["/bin/sh", "-c"]
+        args: # TODO: initialize the db and run the app. 
+        env: # TODO: add all needed environment variables
+        - name: SCRIPT_NAME
+          value: #Add /yourusername
+        - name: GITHUB_USER
+          value: # Add your github username
+        volumeMounts:
+        - name: db-volume
+          mountPath: /db
+      volumes:
+      - name: db-volume
+        persistentVolumeClaim:
+          claimName: db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # TODO add nam
+# TODO: add spec
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: # add the name of the ingress - use the format <yourusername>-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kubernetes.jackops.dev
+    http:
+      paths:
+      - path: #Add /yourusername
+        pathType: Prefix
+        backend:
+          service:
+            # TODO complete the service name
