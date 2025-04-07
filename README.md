@@ -7,6 +7,12 @@ CI/CD Diaries is a very simple Flask application that displays the Github reposi
 
 ## Install and run the application
 
+#### Prerequisites
+
+You need to install sqlite:
+
+Basic instructions on how to download sqlite are available [here](https://www.sqlite.org/download.html).
+
 ### Environment variables:
 
 
@@ -40,6 +46,20 @@ GITHUB_USER = 'jackap'
 
 1. `pip install -r requirements.txt`
 2. Verify installation: `cd app && flask routes` (should show the different routes of the server)
+
+### Run the application locally
+
+From the `app` folder run: `flask createdb`
+
+#### First time installation
+
+The app needs to load the repository information of the `GITHUB_USER`.
+
+> Remember to set the `GITHUB_USER` environment variable
+
+To do that:
+1.  Run `flask createdb` to create the database (pay attention to the `SQLALCHEMY_DATABASE_URI` path. Usually you have to modify it for your local installation. Try using an absolute path)
+2. Run `flask addrepos` to downlad metadata information about the repositories
 
 ### Unit tests
 
