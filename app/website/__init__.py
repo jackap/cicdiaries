@@ -3,7 +3,6 @@
 from .shared.init_setup import setup_logging
 from .models import News
 from .routes import blog as blog_route
-from .routes import news_api as news_route
 from .routes import repos as repos_route
 from website.connection import db
 from flask_cors import CORS
@@ -26,9 +25,9 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     CORS(app)
     utils.load_env(test_config, app)
-    setup_admin(app)
     db.init_app(app)
     setup_logging(app)
+    setup_admin(app)
     register_routes(app)
     try:
         os.makedirs(app.instance_path)
@@ -42,7 +41,6 @@ def register_routes(app):
     """
     Here I register the routes for the application
     """
-    app.register_blueprint(news_route)
     app.register_blueprint(repos_route)
     app.register_blueprint(blog_route)
 
@@ -50,8 +48,6 @@ def register_routes(app):
 
 
 app = create_app()
-with app.app_context():
-    db.session.autoflush = False
 
 
 @app.route("/")

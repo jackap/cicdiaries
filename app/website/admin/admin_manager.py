@@ -1,4 +1,5 @@
-from flask import request, render_template
+from flask import request, render_template, redirect, url_for
+
 from flask_admin import Admin
 from website.models import News, BlogPost
 from website.connection import db
@@ -33,12 +34,12 @@ def setup_admin(app):
             if (username == os.environ.get('ADMIN_USERNAME')
                     and password == os.environ.get('ADMIN_PASSWORD')):
                 login_user(User(username))
-                return 'Logged in!'
+                return redirect(os.environ.get('ADMIN_URL'))
 
         return render_template('login.html', error=True)
 
     @app.route("/logout")
-    def logout(app):
+    def logout():
         logout_user()
         app.logger.info('Logged out')
-        return admin
+        return redirect(url_for('login'))
