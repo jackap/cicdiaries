@@ -3,14 +3,16 @@ from website.connection import db
 
 class BlogPost(db.Model):
     __tablename__ = 'blog'
+    
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)  # optional: add a title
     body = db.Column(db.Text(), nullable=False)
-    news_id = db.Column(db.Integer, db.ForeignKey(
-        'news.id'), nullable=False, index=True)
-    news = db.relationship("News", foreign_keys=[news_id])
+    created_at = db.Column(db.DateTime, server_default=db.func.now(), nullable=False)
 
     def serialize(self):
         return {
-            'news': self.news.serialize(),
-            'body': self.body
+            'id': self.id,
+            'title': self.title,
+            'body': self.body,
+            'created_at': self.created_at.isoformat()
         }
