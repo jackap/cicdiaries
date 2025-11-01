@@ -1,1 +1,19 @@
-{% extends 'admin/master.html' %}
+{% extends 'admin/base.html' %}
+
+{% block body %}
+{{ super() }}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="custom-title">Admin Dashboard</h2>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">← Back to site</a>
+    </div>
+
+    <div class="card shadow-sm p-4">
+        <h4>Welcome to the Admin Panel</h4>
+        <p class="lead mb-3">
+            Manage your blog posts, news, and repositories directly from this interface.
+        </p> 
+    </div>
+</div>
+{% endblock %}
