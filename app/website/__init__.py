@@ -14,6 +14,10 @@ import requests
 import website.utils as utils
 from .admin import setup_admin
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 def create_app(test_config=None):
     """
@@ -46,6 +50,8 @@ def register_routes(app):
 
 
 app = create_app()
+with app.app_context():
+    db.session.autoflush = False
 
 
 @app.route("/")
