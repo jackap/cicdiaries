@@ -1,6 +1,7 @@
 """
 This module is used to handle the blog endpoint
 """
+import markdown
 from flask import Blueprint, render_template, abort
 from website.models.blog_post import BlogPost
 
@@ -22,4 +23,8 @@ def blog_list():
 def get_post(post_id):
     """Render a single blog post by id"""
     post = BlogPost.query.get_or_404(post_id)
-    return render_template('blog_detail.html', post=post)
+    post_html = markdown.markdown(
+        post.body,
+        extensions=['fenced_code', 'codehilite', 'tables', 'toc', 'sane_lists']
+    )
+    return render_template('blog_detail.html', post=post, post_html=post_html)
