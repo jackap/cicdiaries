@@ -1,7 +1,7 @@
 """
 This module is used to handle the blog endpoint
 """
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify,render_template
 from website.models.blog_post import BlogPost
 
 blog = Blueprint(
@@ -14,10 +14,10 @@ blog = Blueprint(
 @blog.route('/')
 def get_posts():
     """Return all the posts available """
-    news = list()
+    posts = list()
     for element in BlogPost.query.all():
-        news.append(element.serialize())
-    return jsonify({'data': news})
+        posts.append(element.serialize())
+    return render_template('blog.html',blog_posts=posts)
 
 
 @blog.route('/<post_id>')
