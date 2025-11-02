@@ -1,13 +1,26 @@
 {% extends 'admin/model/create.html' %}
 
 {% block head_css %}
-{{ super() }}
-{{ simplemde.css }}
-{{ simplemde.js }}
+  {{ super() }}
+  {{ simplemde.css }}
+  {{ simplemde.js }}
 {% endblock %}
 
-
 {% block body %}
-{{ super() }}
-{{ simplemde.load }}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="custom-title">Create {{ admin_view.name }}</h2>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">← Back to site</a>
+    </div>
+
+    <div class="card shadow-sm p-4">
+        {# Render the default Flask-Admin create form #}
+        {{ super() }}
+    </div>
+</div>
+{% endblock %}
+
+{% block tail_js %}
+  {{ super() }}
+  {{ simplemde.load }}
 {% endblock %}

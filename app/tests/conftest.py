@@ -2,6 +2,9 @@ import os
 import tempfile
 import pytest
 import website
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 @pytest.fixture
@@ -13,11 +16,11 @@ def app():
     app = website.create_app({
         'TESTING': True,
         'DATABASE': db_path,
+        'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
+        'SERVER_NAME': 'localhost'
+        
     })
 
-    # create the database and load test data
-    with app.app_context():
-        website.init_db()
 
     yield app
 

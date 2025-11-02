@@ -46,7 +46,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: kubernetes.jackops.dev
+  - host: cicdiaries.jackops.dev
     http:
       paths:
       - path: #Add /yourusername

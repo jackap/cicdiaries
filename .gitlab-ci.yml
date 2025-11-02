@@ -74,8 +74,8 @@ deploy:
     entrypoint: [""]
   script:
     - kubectl config use-context $KUBE_CONTEXT
-    - kubectl get secret regcred -n jacopobufalino >/dev/null 2>&1  || kubectl create secret docker-registry regcred -n jacopobufalino --docker-server=$CI_REGISTRY --docker-username=jacopobufalino@gmail.com --docker-password=$REGISTRY_TOKEN --docker-email=jacopobufalino@gmail.com
-    - kubectl apply -f k8s.yaml -n jacopobufalino
+    - kubectl get secret regcred -n $USERNAME >/dev/null 2>&1  || kubectl create secret docker-registry regcred -n $USERNAME --docker-server=$CI_REGISTRY --docker-username=$EMAIL --docker-password=$REGISTRY_TOKEN --docker-email=$EMAIL
+    - kubectl apply -f k8s.yaml -n $USERNAME
 
   variables:
     KUBE_CONTEXT: "<your_group>/cloud-security-lab:k8s-agent"
@@ -86,7 +86,7 @@ notify-success:
   image: curlimages/curl:latest
   script:
     - | 
-      MESSAGE="✅ Deployment Succeeded! Pipeline:[#$CI_PIPELINE_ID]($CI_PIPELINE_URL) -- Visit: https://kubernetes.jackops.dev/<yourusername>"
+      MESSAGE="✅ Deployment Succeeded! Pipeline:[#$CI_PIPELINE_ID]($CI_PIPELINE_URL) -- Visit: https://cicdiaries.jackops.dev/<yourusername>"
       curl -s -X POST https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage \
         -d chat_id="${TELEGRAM_CHAT_ID}" \
         -d parse_mode="Markdown" \
