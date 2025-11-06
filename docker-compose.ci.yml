@@ -5,7 +5,7 @@ networks:
 services:
   blog:
     hostname: blog
-    image: 100.78.121.74:5001/jacopobufalino/cloud-security-lab:latest
+    image: $CI_REGISTRY_IMAGE:latest
     command: flask run --host=0.0.0.0 --debug
     networks:
       - cloudnet

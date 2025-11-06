@@ -2,11 +2,8 @@ image: python:latest
 
 stages:
   - install
-  - lint
-  - code-audit
   - test
   - containerize
-  - container-audit
   - container-test
   - deploy
   - notify
@@ -16,25 +13,11 @@ install:
   script:
     - echo "Install dependencies from requirements.txt and cache them" && false  
 
-lint:
-  stage: lint
-  script:
-   - echo "Load the installed dependencies from cache and lint the code" && false
-
-code-audit:
-  stage: code-audit
-  script:
-   - echo "Load the installed dependencies from cache and audit the code" && false
-
-dep-audit:
-  stage: code-audit
-  script:
-   - echo "Load the installed dependencies from cache and audit the dependencies (can fail)" && false
-
 test:
   stage: test
   script:
    - echo "Load the installed dependencies from cache and test the code" && false
+
 containerize:
   stage: containerize
   image: docker:latest
@@ -43,17 +26,6 @@ containerize:
   script:
     - echo "Build, tag and push the image" && false
 
-
-container-audit:
-  stage: container-audit
-  image: docker:stable
-  services:
-    - docker:dind
-
-  before_script:
-    - echo "Install trivy"
-  script:
-    - echo "run trivy (can fail)" || false
 
 container-test:
   stage: container-test
@@ -70,7 +42,7 @@ container-test:
 deploy:
   stage: deploy
   image:
-    name: bitnami/kubectl:latest
+    name: alpine/kubectl:latest
     entrypoint: [""]
   script:
     - kubectl config use-context $KUBE_CONTEXT
