@@ -54,6 +54,10 @@ SCRIPT_NAME=""
 
 ### Install dependencies
 
+> [!NOTE]
+> You need to setup environment variables before installing the app if you want the command below to succeed!
+   
+
 ```bash
 python3 -m venv venv
 source ./venv/bin/activate
