@@ -62,7 +62,7 @@ SCRIPT_NAME=""
 python3 -m venv venv
 source ./venv/bin/activate
 pip install -r requirements.txt
-pushd app && flask routes && popd # Verify everything works
+pushd app; flask routes; popd # Verify everything works
 ```
 
 ### Run the application locally (testing)
