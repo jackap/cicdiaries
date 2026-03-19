@@ -69,9 +69,10 @@ pushd app; flask routes; popd # Verify everything works
 
 1. Copy environment: `cp .env.dist .env`
 2. Go to the app folder: `cd app`
-3. Create the database: `flask createdb`
-4. Fetch GitHub repository data: `flask addrepos`
-5. Run the app: `flask run`
+3. Create the db folder `mkdir db`
+4. Create the database: `flask createdb`
+5. Fetch GitHub repository data: `flask addrepos`
+6. Run the app: `flask run`
 
 ### Unit tests
 
